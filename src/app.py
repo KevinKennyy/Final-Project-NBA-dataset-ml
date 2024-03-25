@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import pickle
 from sklearn.preprocessing import LabelEncoder
+from xgboost import XGBClassifier
+
 
 #Cargar modelo
 with open("..\\models\\xgbclassifier_lr-0.5_md-6_subsample_0.6.pkl" ,'rb') as md:
@@ -161,7 +163,7 @@ def main():
             #st.subheader('Probabilidad de Prediccion')
             #st.write(predict_prob)
         
-        if prediccion >= 0.50:
+        if prediccion == 1:
             st.subheader("Este equipo tiene muchas probabilidades de ganar")
         else:
             st.subheader('Este equipo tiene las de perder')
