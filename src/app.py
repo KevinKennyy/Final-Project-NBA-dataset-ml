@@ -4,10 +4,10 @@ import pickle
 from sklearn.preprocessing import LabelEncoder
 
 #Cargar modelo
-with open('random_forest_regressor_default_42.pkl' ,'rb') as md:
+with open("..\\models\\xgbclassifier_lr-0.5_md-6_subsample_0.6.pkl" ,'rb') as md:
     model = pickle.load(md)
 #Cargar dataset
-total_data = pd.read_csv('total_data_final.csv')
+total_data = pd.read_csv("..\\data\\processed\\total_data_final.csv")
 
 
 def main():
@@ -76,15 +76,14 @@ def main():
     #Primero una lista con las columnas categoricas que estamos manejando
     categorical_cols = ['season_id', 'team_id_home', 'team_abbreviation_home', 'team_name_home', 'game_id', 'game_date', 'matchup_home', 'season_type']
 
-    def label_encode_columns(df, columns):
-        df_encoded = df.copy()  # Copiar el DataFrame para evitar modificar el original
-        label_encoder = LabelEncoder()
-        for column in columns:
-            df_encoded[column] = label_encoder.fit_transform(df[column])
-        return df_encoded
+    with open("..\\data\\processed\\encode_data.pkl", 'rb') as f:
+        encoding_info = pickle.load(f)
 
-    # Preprocesar datos y convertirlos a matrices dispersas
-    data_cat_final = label_encode_columns(data_cat_df, categorical_cols)
+    # Aplicar el 
+    data_cat_encoded = data_cat_df.copy()
+    for col in categorical_cols:
+    # Map labels from encoding information to the new data
+        data_cat_encoded[col] = data_cat_encoded[col].map(lambda x: encoding_info[col].tolist().index(x) if x in encoding_info[col] else -1)
 
     #Empezamos con la insercion de datos numericos
 
@@ -112,17 +111,23 @@ def main():
     blk_away = st.number_input("Bloqueos visitante", min_value=0)
     tov_away = st.number_input("Perdidas de balón visitante", min_value=0)
 
+    fg_pct_home= st.slider("% de tiros realizados (local)", min_value=0, max_value=100)
+    fg_pct_home = fg_pct_home/100
+    
+    fg_pct_away= st.slider("% de tiros realizados (visitante)", min_value=0, max_value=100)
+    fg_pct_away = fg_pct_away/100
 
-    fg_pct_home = st.number_input("Buenos" )
-    fg_pct_away = st.number_input("Dias")
-
-
-
-    fg3_pct_home = st.number_input("Estrellitas")
-    fg3_pct_away = st.number_input("el mundo")
-
-    ft_pct_home = st.number_input("les dice")
-    ft_pct_away = st.number_input("Hola")
+    fg3_pct_home= st.slider("% de tiros de 3 puntos (local)", min_value=0, max_value=100)
+    fg3_pct_home = fg3_pct_home/100
+    
+    fg3_pct_away= st.slider("% de tiros de 3 puntos (visitante)", min_value=0, max_value=100)
+    fg3_pct_away = fg3_pct_away/100
+    
+    ft_pct_home= st.slider("% de tiros libres (local)", min_value=0, max_value=100)
+    ft_pct_home = ft_pct_home/100
+    
+    ft_pct_away= st.slider("% de tiros libres (visitante)", min_value=0, max_value=100)
+    ft_pct_away = ft_pct_away/100
 
     #Creamos un diccionario y un DataFrame de los datos numericos
     data_num = {'fga_home': fga_home, 
@@ -141,7 +146,7 @@ def main():
 
     if button:
         data_num_df = pd.DataFrame(data_num, index=[0])
-        data_final = pd.concat([data_num_df, data_cat_final], axis=1)
+        data_final = pd.concat([data_num_df, data_cat_encoded], axis=1)
         data_final = data_final.values.tolist()
         prediccion = model.predict(data_final)
         #predict_prob = model.predict_proba(data_final)
