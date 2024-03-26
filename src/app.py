@@ -13,8 +13,9 @@ with open(model_path, "rb") as f:
     model = pickle.load(f)
 
 #Cargar dataset
-total_data = pd.read_csv("..\\data\\processed\\total_data_final.csv")
+data_path = os.path.join("data", "processed", "total_data_final.csv")
 
+total_data = pd.read_csv(data_path)
 
 def main():
     st.title("Predicciones NBA")
