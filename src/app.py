@@ -3,11 +3,15 @@ import pandas as pd
 import pickle
 from sklearn.preprocessing import LabelEncoder
 from xgboost import XGBClassifier
+import os
 
 
 #Cargar modelo
-with open("..\\models\\xgbclassifier_lr-0.5_md-6_subsample_0.6.pkl" ,'rb') as md:
-    model = pickle.load(md)
+model_path = os.path.join("models", "xgbclassifier_lr-0.5_md-6_subsample_0.6.pkl")
+
+with open(model_path, "rb") as f:
+    model = pickle.load(f)
+
 #Cargar dataset
 total_data = pd.read_csv("..\\data\\processed\\total_data_final.csv")
 
