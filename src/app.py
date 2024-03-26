@@ -24,7 +24,7 @@ def main():
     st.title("Predicciones NBA")
 
     # Crear una barra de pestañas con tres opciones
-    tab1, tab2, tab3 = st.tabs(["Tab 1", "Tab 2", "Tab 3"])
+    tab1, tab2, tab3 = st.tabs(["Informacion a resaltar", "Contexto y Limitaciones", "Formulario"])
 
     # Contenido de la primera pestaña
     with tab1:
