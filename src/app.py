@@ -79,8 +79,10 @@ def main():
 
     #Primero una lista con las columnas categoricas que estamos manejando
     categorical_cols = ['team_abbreviation_home', 'team_name_home', 'matchup_home', 'season_type']
+    
+    encode_path = os.path.join("data", "processed", "encode_data.pkl")
 
-    with open("..\\data\\processed\\encode_data.pkl", 'rb') as f:
+    with open(encode_path, 'rb') as f:
         encoding_info = pickle.load(f)
 
     # Aplicar el 
