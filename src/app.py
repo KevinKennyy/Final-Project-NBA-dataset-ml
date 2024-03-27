@@ -4,45 +4,46 @@ import pickle
 from sklearn.preprocessing import LabelEncoder
 from xgboost import XGBClassifier
 import os
+from PIL import Image
 
 
-#Cargar modelo
+# Cargar modelo
 model_path = os.path.join("models", "xgbclassifier_lr-0.5_md-6_subsample_0.6.pkl")
 
 with open(model_path, "rb") as f:
     model = pickle.load(f)
 
-#Cargar dataset
+# Cargar dataset
 data_path = os.path.join("data", "processed", "total_data_final.csv")
 
 total_data = pd.read_csv(data_path)
 
-
-
 def main():
-    
-    st.title("Predicciones NBA")
+   
 
+    # Mostrar imagen de fondo
+    img_path = "./images/7c6921a638e58fb27dc09d657baf256e.jpeg"
+    img = Image.open(img_path)
+    st.image(img, width=800)
+
+    # Contenido del resto de tu aplicación Streamlit...
+    st.title("Predicciones NBA")
     # Crear una barra de pestañas con tres opciones
-    tab1, tab2, tab3 = st.tabs(["Tab 1", "Tab 2", "Tab 3"])
+    tab1, tab2, tab3 = st.tabs(["Informacion a resaltar", "Contexto y Limitaciones", "Formulario"])
 
     # Contenido de la primera pestaña
     with tab1:
         st.write("Informacion a resaltar")
-
         st.write("Dentro del analisis realizado se pueden resaltar lo siguiente")
-
         st.image("./images/Distribucion de Victorias y Derrotas.png")
         st.write("Podemos observar que cuando juegan en local los equipos tienden a ganar mas veces")
         st.write('')
-
         st.image("./images/Cantidad de victorias y derrotas por año en Local.png", caption="Victorias y Derrotas")
         st.write("Aqui podemos observar la cantidad de Victorias y Derrotas por años en Local")
         st.write('')
-
         st.image("./images/Porcentaje de victorias y derrotas por equipo local.png")
         st.write("Aqui vemos el porcentaje de Victorias y Derrotas por equipos cuando juegan en local")
-        
+
 
 
 
@@ -131,32 +132,39 @@ def main():
 
         #Empezamos con la insercion de datos numericos
 
-        red_box = st.container()
 
-        with red_box:
-            st.subheader("Equipo local")
+        with st.form("my_form"):
+            
+            col1, col2 = st.columns(2)
 
-            fga_home = st.number_input("Tiros de campo intentados en casa", min_value=0)
-            fg3a_home = st.number_input("Tiros de campo de tres puntos intentados en casa", min_value=0)
-            fta_home = st.number_input("Tiros de campo libres intentados en casa", min_value=0)
-            oreb_home = st.number_input("Rebotes Ofensivos en casa", min_value=0)
-            dreb_home = st.number_input("Rebotes Defensivos en casa", min_value=0)
-            ast_home = st.number_input("Asistencias en casa", min_value=0)
-            stl_home = st.number_input("Robos en casa", min_value=0)
-            blk_home = st.number_input("Bloqueos en casa", min_value=0)
-            tov_home = st.number_input("Perdidas de balón en casa", min_value=0)
+            with col1:
+                st.subheader("Equipo local")
 
-            st.subheader("Equipo Visitante")
+                fga_home = st.number_input("Tiros de campo intentados en casa", min_value=0)
+                fg3a_home = st.number_input("Tiros de campo de tres puntos intentados en casa", min_value=0)
+                fta_home = st.number_input("Tiros de campo libres intentados en casa", min_value=0)
+                oreb_home = st.number_input("Rebotes Ofensivos en casa", min_value=0)
+                dreb_home = st.number_input("Rebotes Defensivos en casa", min_value=0)
+                ast_home = st.number_input("Asistencias en casa", min_value=0)
+                stl_home = st.number_input("Robos en casa", min_value=0)
+                blk_home = st.number_input("Bloqueos en casa", min_value=0)
+                tov_home = st.number_input("Perdidas de balón en casa", min_value=0)
 
-            fga_away = st.number_input("Tiros de campo intentados visitante", min_value=0)
-            fg3a_away = st.number_input("Tiros de campo de tres puntos intentados visitante", min_value=0)
-            fta_away = st.number_input("Tiros de campo libres intentados visitante", min_value=0)
-            oreb_away = st.number_input("Rebotes Ofensivos visitante", min_value=0)
-            dreb_away = st.number_input("Rebotes Defensivos visitante", min_value=0)
-            ast_away = st.number_input("Asistencias visitante", min_value=0)
-            stl_away = st.number_input("Robos visitante", min_value=0)
-            blk_away = st.number_input("Bloqueos visitante", min_value=0)
-            tov_away = st.number_input("Perdidas de balón visitante", min_value=0)
+            with col2:
+                st.subheader("Equipo Visitante")
+
+                fga_away = st.number_input("Tiros de campo intentados visitante", min_value=0)
+                fg3a_away = st.number_input("Tiros de campo de tres puntos intentados visitante", min_value=0)
+                fta_away = st.number_input("Tiros de campo libres intentados visitante", min_value=0)
+                oreb_away = st.number_input("Rebotes Ofensivos visitante", min_value=0)
+                dreb_away = st.number_input("Rebotes Defensivos visitante", min_value=0)
+                ast_away = st.number_input("Asistencias visitante", min_value=0)
+                stl_away = st.number_input("Robos visitante", min_value=0)
+                blk_away = st.number_input("Bloqueos visitante", min_value=0)
+                tov_away = st.number_input("Perdidas de balón visitante", min_value=0)
+
+
+            button = st.form_submit_button(label="Submit")
 
     #fg_pct_home= st.slider("% de tiros realizados (local)", min_value=0, max_value=100)
     #fg_pct_home = fg_pct_home/100
@@ -177,13 +185,10 @@ def main():
     'ast_home': ast_home, 'stl_home': stl_home, 'blk_home': blk_home, 'tov_home':tov_home, 
     'fga_away': fga_away, 'fg3a_away': fg3a_away, 'fta_away': fta_away, 'oreb_away': oreb_away, 'dreb_away': dreb_away,
     'ast_away': ast_away, 'stl_away': stl_away, 'blk_away': blk_away, 'tov_away': tov_away }
-    
-        st.warning("Por favor, llene todos los campos con valores numéricos diferentes de cero antes de generar el DataFrame.")
 
     
 
-        button = st.button("Mostrar")
-
+            
 
         if button:
             data_num_df = pd.DataFrame(data_num, index=[0])
