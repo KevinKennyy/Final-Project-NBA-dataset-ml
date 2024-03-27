@@ -4,45 +4,46 @@ import pickle
 from sklearn.preprocessing import LabelEncoder
 from xgboost import XGBClassifier
 import os
+from PIL import Image
 
 
-#Cargar modelo
+# Cargar modelo
 model_path = os.path.join("models", "xgbclassifier_lr-0.5_md-6_subsample_0.6.pkl")
 
 with open(model_path, "rb") as f:
     model = pickle.load(f)
 
-#Cargar dataset
+# Cargar dataset
 data_path = os.path.join("data", "processed", "total_data_final.csv")
 
 total_data = pd.read_csv(data_path)
 
-
-
 def main():
-    
-    st.title("Predicciones NBA")
+   
 
+    # Mostrar imagen de fondo
+    img_path = "./images/7c6921a638e58fb27dc09d657baf256e.jpeg"
+    img = Image.open(img_path)
+    st.image(img, width=800)
+
+    # Contenido del resto de tu aplicación Streamlit...
+    st.title("Predicciones NBA")
     # Crear una barra de pestañas con tres opciones
     tab1, tab2, tab3 = st.tabs(["Informacion a resaltar", "Contexto y Limitaciones", "Formulario"])
 
     # Contenido de la primera pestaña
     with tab1:
         st.write("Informacion a resaltar")
-
         st.write("Dentro del analisis realizado se pueden resaltar lo siguiente")
-
         st.image("./images/Distribucion de Victorias y Derrotas.png")
         st.write("Podemos observar que cuando juegan en local los equipos tienden a ganar mas veces")
         st.write('')
-
         st.image("./images/Cantidad de victorias y derrotas por año en Local.png", caption="Victorias y Derrotas")
         st.write("Aqui podemos observar la cantidad de Victorias y Derrotas por años en Local")
         st.write('')
-
         st.image("./images/Porcentaje de victorias y derrotas por equipo local.png")
         st.write("Aqui vemos el porcentaje de Victorias y Derrotas por equipos cuando juegan en local")
-        
+
 
 
 
