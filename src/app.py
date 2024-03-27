@@ -132,32 +132,39 @@ def main():
 
         #Empezamos con la insercion de datos numericos
 
-        red_box = st.container()
 
-        with red_box:
-            st.subheader("Equipo local")
+        with st.form("my_form"):
+            
+            col1, col2 = st.columns(2)
 
-            fga_home = st.number_input("Tiros de campo intentados en casa", min_value=0)
-            fg3a_home = st.number_input("Tiros de campo de tres puntos intentados en casa", min_value=0)
-            fta_home = st.number_input("Tiros de campo libres intentados en casa", min_value=0)
-            oreb_home = st.number_input("Rebotes Ofensivos en casa", min_value=0)
-            dreb_home = st.number_input("Rebotes Defensivos en casa", min_value=0)
-            ast_home = st.number_input("Asistencias en casa", min_value=0)
-            stl_home = st.number_input("Robos en casa", min_value=0)
-            blk_home = st.number_input("Bloqueos en casa", min_value=0)
-            tov_home = st.number_input("Perdidas de balón en casa", min_value=0)
+            with col1:
+                st.subheader("Equipo local")
 
-            st.subheader("Equipo Visitante")
+                fga_home = st.number_input("Tiros de campo intentados en casa", min_value=0)
+                fg3a_home = st.number_input("Tiros de campo de tres puntos intentados en casa", min_value=0)
+                fta_home = st.number_input("Tiros de campo libres intentados en casa", min_value=0)
+                oreb_home = st.number_input("Rebotes Ofensivos en casa", min_value=0)
+                dreb_home = st.number_input("Rebotes Defensivos en casa", min_value=0)
+                ast_home = st.number_input("Asistencias en casa", min_value=0)
+                stl_home = st.number_input("Robos en casa", min_value=0)
+                blk_home = st.number_input("Bloqueos en casa", min_value=0)
+                tov_home = st.number_input("Perdidas de balón en casa", min_value=0)
 
-            fga_away = st.number_input("Tiros de campo intentados visitante", min_value=0)
-            fg3a_away = st.number_input("Tiros de campo de tres puntos intentados visitante", min_value=0)
-            fta_away = st.number_input("Tiros de campo libres intentados visitante", min_value=0)
-            oreb_away = st.number_input("Rebotes Ofensivos visitante", min_value=0)
-            dreb_away = st.number_input("Rebotes Defensivos visitante", min_value=0)
-            ast_away = st.number_input("Asistencias visitante", min_value=0)
-            stl_away = st.number_input("Robos visitante", min_value=0)
-            blk_away = st.number_input("Bloqueos visitante", min_value=0)
-            tov_away = st.number_input("Perdidas de balón visitante", min_value=0)
+            with col2:
+                st.subheader("Equipo Visitante")
+
+                fga_away = st.number_input("Tiros de campo intentados visitante", min_value=0)
+                fg3a_away = st.number_input("Tiros de campo de tres puntos intentados visitante", min_value=0)
+                fta_away = st.number_input("Tiros de campo libres intentados visitante", min_value=0)
+                oreb_away = st.number_input("Rebotes Ofensivos visitante", min_value=0)
+                dreb_away = st.number_input("Rebotes Defensivos visitante", min_value=0)
+                ast_away = st.number_input("Asistencias visitante", min_value=0)
+                stl_away = st.number_input("Robos visitante", min_value=0)
+                blk_away = st.number_input("Bloqueos visitante", min_value=0)
+                tov_away = st.number_input("Perdidas de balón visitante", min_value=0)
+
+
+            button = st.form_submit_button(label="Submit")
 
     #fg_pct_home= st.slider("% de tiros realizados (local)", min_value=0, max_value=100)
     #fg_pct_home = fg_pct_home/100
@@ -178,13 +185,10 @@ def main():
     'ast_home': ast_home, 'stl_home': stl_home, 'blk_home': blk_home, 'tov_home':tov_home, 
     'fga_away': fga_away, 'fg3a_away': fg3a_away, 'fta_away': fta_away, 'oreb_away': oreb_away, 'dreb_away': dreb_away,
     'ast_away': ast_away, 'stl_away': stl_away, 'blk_away': blk_away, 'tov_away': tov_away }
-    
-        st.warning("Por favor, llene todos los campos con valores numéricos diferentes de cero antes de generar el DataFrame.")
 
     
 
-        button = st.button("Mostrar")
-
+            
 
         if button:
             data_num_df = pd.DataFrame(data_num, index=[0])
