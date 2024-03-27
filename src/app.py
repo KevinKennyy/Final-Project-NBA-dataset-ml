@@ -33,7 +33,7 @@ def main():
 
     # Contenido de la primera pestaña
     with tab1:
-        st.write("Informacion a resaltar")
+        st.header("Informacion a resaltar")
         st.write("Dentro del analisis realizado se pueden resaltar lo siguiente")
         st.image("./images/Distribucion de Victorias y Derrotas.png")
         st.write("Podemos observar que cuando juegan en local los equipos tienden a ganar mas veces")
@@ -49,15 +49,21 @@ def main():
 
 # Contenido de la segunda pestaña
     with tab2:
-        st.write("Contexto y Limitaciones")
+        st.header("Contexto y Limitaciones")
+        st.subheader("Contexto")
+        st.write("El basketball es un deporte de equipo que se juega con dos equipos de cinco jugadores cada uno. El objetivo principal del juego es anotar puntos lanzando la pelota en la canasta del equipo contrario. El equipo con más puntos al final del partido gana.")
+        st.write("El juego se lleva a cabo en una cancha rectangular con una canasta en cada extremo. Los jugadores pueden moverse por la cancha driblando la pelota (botándola en el suelo mientras se mueven) o pasándola entre ellos. El equipo en posesión de la pelota intenta encontrar una posición de tiro favorable para anotar, mientras que el equipo defensor intenta evitar que esto suceda bloqueando tiros, robando la pelota o forzando pérdidas de posesión.")
+        st.write("El análisis de datos en el basketball puede abordar una variedad de aspectos del juego, para este análisis específico, se utilizó un conjunto de datos relacionados con partidos de basketball para predecir el resultado de un partido en función de diversas variables, como estadísticas de equipo y características del partido. Se empleó un modelo de aprendizaje automático (XGBoost) entrenado previamente para realizar estas predicciones. El objetivo es proporcionar información útil para equipos, entrenadores y aficionados sobre qué factores pueden influir en el resultado de un partido y cómo pueden aprovecharse para mejorar el desempeño del equipo.")
 
+        st.subheader("Limitaciones")
         st.write("Al momento de realizar este analisis nos encontramos con varias limitaciones, las cuales seran mencionadas a continuacion")
         st.write('')
+
         
 
 # Contenido de la tercera pestaña
     with tab3:
-        st.write("Formulario")
+        st.header("Formulario")
 
         st.sidebar.image("./images/nba-logo-1.png", caption="NBA")
 
