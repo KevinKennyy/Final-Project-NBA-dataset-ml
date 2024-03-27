@@ -22,7 +22,7 @@ def main():
    
 
     # Mostrar imagen de fondo
-    img_path = "C:/Users/kevin/Desktop/Proyecto Acabado NBA/images/7c6921a638e58fb27dc09d657baf256e.jpeg"
+    img_path = "./images/7c6921a638e58fb27dc09d657baf256e.jpeg"
     img = Image.open(img_path)
     st.image(img, width=800)
 
