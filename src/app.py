@@ -33,7 +33,7 @@ def main():
 
     # Contenido de la primera pestaña
     with tab1:
-        st.header("Informacion a resaltar")
+        st.write("Informacion a resaltar")
         st.write("Dentro del analisis realizado se pueden resaltar lo siguiente")
         st.image("./images/Distribucion de Victorias y Derrotas.png")
         st.write("Podemos observar que cuando juegan en local los equipos tienden a ganar mas veces")
@@ -49,6 +49,7 @@ def main():
 
 # Contenido de la segunda pestaña
     with tab2:
+      with tab2:
         st.header("Contexto y Limitaciones")
         st.subheader("Contexto")
         st.image("./images/basketball.png", caption="Basketball")
@@ -60,18 +61,19 @@ def main():
         st.subheader("Limitaciones")
         st.write("Al momento de realizar este analisis nos encontramos con varias limitaciones, las cuales seran mencionadas a continuacion")
 
-        st.image("./images/NaN.png", caption="El dataset posee una gran cantidad de datos nulos")
+        st.image("./images/NaN.png")
 
+        st.image("./images/Porcentaje de nulidad.png", caption="El dataset posee una gran cantidad de datos nulos")
+        
         st.write('Como se puede observar, el dataset original posee una gran cantidad de nulos. Esto se debe a que estos nulos pertenecen a partidos que se celebraron en una epoca en la que no existia ni la tecnologia ni los medios necesarios para recopilar dicha informacion')
 
         st.image("./images/Equipos_Perdiendo.png", caption="Equipos que siempre pierden o ganan")
         st.write('En el dataset tambien aparecen equipos que solo pierden o ganan, lo cual puede generar un sesgo a la hora de intentar predecir. Esto puede deberse a una falta de datos en el dataset o que simplemente el desempeño de dichos equipos siempre ha sido mediocre')
 
-        
 
 # Contenido de la tercera pestaña
     with tab3:
-        st.header("Formulario")
+        st.write("Formulario")
 
         st.sidebar.image("./images/nba-logo-1.png", caption="NBA")
 
@@ -96,7 +98,6 @@ def main():
         #Localizar valores en funcion del equipo que ha sido seleccionado
         valor_abb = team_df.loc[team_df['final_team_home'] == input_team_list, 'team_abbreviation_home'].iloc[0]
         valor_team = team_df.loc[team_df['final_team_home'] == input_team_list, 'team_name_home'].iloc[0]
-        #team_id_home = total_data.loc[total_data['team_name_home'] == valor_team, 'team_id_home'].iloc[0]
     
         #Lista de Matches
         matchup_data = total_data['matchup_home']
@@ -105,20 +106,12 @@ def main():
         local_matches = [element for element in matchup_list if element.startswith(valor_abb)]
         match_team_input = st.sidebar.selectbox("Selecciona tu Match", local_matches)
 
-    #Lista de Fechas
-    #game_date = total_data['game_date']
-    #game_date = game_date.drop_duplicates()
-    #game_list = total_data.loc[total_data['matchup_home'] == match_team_input, 'game_date'].tolist()
-    #game_date_input = st.sidebar.selectbox("Selecciona tu Fecha", game_list)
-    #Localizar el game_id una vez se especifica la fecha
-    #game_id = total_data.loc[total_data['game_date'] == game_date_input, 'game_id'].iloc[0]
 
         #Lista de Temporadas
         season_list = total_data["season_type"].to_list()
         season_list_clean = set(season_list)
         season_list_f = list(season_list_clean)
         input_season_list = st.sidebar.selectbox("Temporada", season_list_f)
-        #season_id = total_data.loc[total_data['game_date'] == game_date_input, 'season_id'].iloc[0]
 
         #Creamos un diccionario con los datos categoricos introducidos por el usuario
 
@@ -180,18 +173,6 @@ def main():
 
             button = st.form_submit_button(label="Submit")
 
-    #fg_pct_home= st.slider("% de tiros realizados (local)", min_value=0, max_value=100)
-    #fg_pct_home = fg_pct_home/100
-    #fg_pct_away= st.slider("% de tiros realizados (visitante)", min_value=0, max_value=100)
-    #fg_pct_away = fg_pct_away/100
-    #fg3_pct_home= st.slider("% de tiros de 3 puntos (local)", min_value=0, max_value=100)
-    #fg3_pct_home = fg3_pct_home/100
-    #fg3_pct_away= st.slider("% de tiros de 3 puntos (visitante)", min_value=0, max_value=100)
-    #fg3_pct_away = fg3_pct_away/100
-    #ft_pct_home= st.slider("% de tiros libres (local)", min_value=0, max_value=100)
-    #ft_pct_home = ft_pct_home/100
-    #ft_pct_away= st.slider("% de tiros libres (visitante)", min_value=0, max_value=100)
-    #ft_pct_away = ft_pct_away/100
 
     #Creamos un diccionario y un DataFrame de los datos numericos
         data_num = {'fga_home': fga_home, 
@@ -201,15 +182,11 @@ def main():
     'ast_away': ast_away, 'stl_away': stl_away, 'blk_away': blk_away, 'tov_away': tov_away }
 
     
-
-            
-
         if button:
             data_num_df = pd.DataFrame(data_num, index=[0])
             data_final = pd.concat([data_num_df, data_cat_encoded], axis=1)
             data_final = data_final.values.tolist()
             prediccion = model.predict(data_final)
-        #predict_prob = model.predict_proba(data_final)
         
         # Mostrar los datos seleccionados y la predicción en Streamlit
             col1, col2 = st.columns(2)
@@ -217,9 +194,6 @@ def main():
             with col1:
                 st.subheader('Prediccion')
                 st.write(prediccion)
-        #with col2:
-            #st.subheader('Probabilidad de Prediccion')
-            #st.write(predict_prob)
         
             if prediccion == 0:
                 st.subheader("Este equipo tiene muchas probabilidades de ganar")
