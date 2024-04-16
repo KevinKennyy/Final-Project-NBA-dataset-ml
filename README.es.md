@@ -19,8 +19,6 @@ El proyecto está organizado de la siguiente manera:
 
 1. Clona el repositorio del proyecto en tu máquina local.
 2. Navega hasta el directorio del proyecto e instala los paquetes de Python requeridos:
-
-```bash
 pip install -r requirements.txt
 
 ## Ejecución de la Aplicación
