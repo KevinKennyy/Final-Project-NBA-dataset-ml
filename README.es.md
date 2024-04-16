@@ -30,8 +30,10 @@ streamlit run app.py
 Trabajando con los Datos
 El proyecto utiliza el archivo total_data_final.csv como conjunto de datos para entrenar el modelo de aprendizaje automático. Si necesitas preprocesar o analizar los datos más a fondo, puedes modificar el script app.py o crear scripts de Python adicionales para manejar estas tareas.
 
-Colaboradores
+Colaboradores:
+
 Kevin Badillo
+
 Dario Zerpa
 
 Notas
