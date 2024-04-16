@@ -1,88 +1,38 @@
-# Plantilla de Proyecto de Ciencia de Datos
+Predictor de Resultados de Partidos de la NBA
+Visión General
+El proyecto "Predictor de Resultados de Partidos de la NBA" se centra en predecir el resultado de los partidos de baloncesto de la NBA utilizando diversas estadísticas de equipos e información específica del juego. El proyecto utiliza técnicas de aprendizaje automático, específicamente un clasificador de bosque aleatorio, para analizar datos históricos de partidos de la NBA y hacer predicciones sobre los resultados de juegos futuros. La aplicación proporciona una interfaz fácil de usar construida con Streamlit, que permite a los usuarios ingresar parámetros relacionados con el juego, como abreviaturas de equipos, enfrentamientos, fecha del juego y tipo de temporada. Una vez que se ingresan los datos, el modelo predice si el equipo local ganará o perderá el juego según la información proporcionada. El proyecto tiene como objetivo ayudar a los entusiastas de la NBA y a los analistas deportivos a hacer predicciones informadas sobre los resultados de los juegos.
 
-Esta plantilla está diseñada para impulsar proyectos de ciencia de datos proporcionando una configuración básica para conexiones de base de datos, procesamiento de datos, y desarrollo de modelos de aprendizaje automático. Incluye una organización estructurada de carpetas para tus conjuntos de datos y un conjunto de paquetes de Python predefinidos necesarios para la mayoría de las tareas de ciencia de datos.
-
-## Estructura
-
+Estructura
 El proyecto está organizado de la siguiente manera:
 
-- `app.py` - El script principal de Python que ejecutas para tu proyecto.
-- `explore.py` - Un notebook para que puedas hacer tus exploraciones, idealmente el codigo de este notebook se migra hacia app.py para subir a produccion.
-- `utils.py` - Este archivo contiene código de utilidad para operaciones como conexiones de base de datos.
-- `requirements.txt` - Este archivo contiene la lista de paquetes de Python necesarios.
-- `models/` - Este directorio debería contener tus clases de modelos SQLAlchemy.
-- `data/` - Este directorio contiene los siguientes subdirectorios:
-  - `interim/` - Para datos intermedios que han sido transformados.
-  - `processed/` - Para los datos finales a utilizar para el modelado.
-  - `raw/` - Para datos brutos sin ningún procesamiento.
+app.py: El script principal de Python que ejecuta el proyecto y sirve como la interfaz de usuario.
+total_data_final.csv: Conjunto de datos que contiene datos de partidos de la NBA limpios y preprocesados.
+new_random_forest_regressor.pkl: Modelo de aprendizaje automático preentrenado para predecir resultados de partidos.
+utils.py: Funciones de utilidad para preprocesamiento de datos y carga de modelos.
+requirements.txt: Lista de paquetes de Python requeridos.
+Configuración
+Prerrequisitos: Asegúrate de tener Python 3.11+ instalado en tu sistema. También necesitarás pip para instalar los paquetes de Python necesarios.
 
-## Configuración
-
-**Prerrequisitos**
-
-Asegúrate de tener Python 3.11+ instalado en tu máquina. También necesitarás pip para instalar los paquetes de Python.
-
-**Instalación**
+Instalación:
 
 Clona el repositorio del proyecto en tu máquina local.
-
 Navega hasta el directorio del proyecto e instala los paquetes de Python requeridos:
-
-```bash
+bash
+Copy code
 pip install -r requirements.txt
-```
-
-**Crear una base de datos (si es necesario)**
-
-Crea una nueva base de datos dentro del motor Postgres personalizando y ejecutando el siguiente comando: `$ createdb -h localhost -U <username> <db_name>`
-Conéctate al motor Postgres para usar tu base de datos, manipular tablas y datos: `$ psql -h localhost -U <username> <db_name>`
-NOTA: Recuerda revisar la información del archivo ./.env para obtener el nombre de usuario y db_name.
-
-¡Una vez que estés dentro de PSQL podrás crear tablas, hacer consultas, insertar, actualizar o eliminar datos y mucho más!
-
-**Variables de entorno**
-
-Crea un archivo .env en el directorio raíz del proyecto para almacenar tus variables de entorno, como tu cadena de conexión a la base de datos:
-
-```makefile
-DATABASE_URL="your_database_connection_url_here"
-```
-
-## Ejecutando la Aplicación
-
+Ejecución de la Aplicación
 Para ejecutar la aplicación, ejecuta el script app.py desde la raíz del directorio del proyecto:
 
-```bash
-python app.py
-```
+bash
+Copy code
+streamlit run app.py
+Trabajando con los Datos
+El proyecto utiliza el archivo total_data_final.csv como conjunto de datos para entrenar el modelo de aprendizaje automático. Si necesitas preprocesar o analizar los datos más a fondo, puedes modificar el script app.py o crear scripts de Python adicionales para manejar estas tareas.
 
-## Añadiendo Modelos
+Colaboradores
+Kevin Kenneth
+Dario Zerpa
 
-Para añadir clases de modelos SQLAlchemy, crea nuevos archivos de script de Python dentro del directorio models/. Estas clases deben ser definidas de acuerdo a tu esquema de base de datos.
-
-Definición del modelo de ejemplo (`models/example_model.py`):
-
-```py
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String
-
-Base = declarative_base()
-
-class ExampleModel(Base):
-    __tablename__ = 'example_table'
-    id = Column(Integer, primary_key=True)
-    name = Column(String)
-
-```
-
-## Trabajando con Datos
-
-Puedes colocar tus conjuntos de datos brutos en el directorio data/raw, conjuntos de datos intermedios en data/interim, y los conjuntos de datos procesados listos para el análisis en data/processed.
-
-Para procesar datos, puedes modificar el script app.py para incluir tus pasos de procesamiento de datos, utilizando pandas para la manipulación y análisis de datos.
-
-## Contribuyentes
-
-Esta plantilla fue construida como parte del [Data Science and Machine Learning Bootcamp](https://4geeksacademy.com/us/coding-bootcamps/datascience-machine-learning) de 4Geeks Academy por [Alejandro Sanchez](https://twitter.com/alesanchezr) y muchos otros contribuyentes. Descubre más sobre [los programas BootCamp de 4Geeks Academy](https://4geeksacademy.com/us/programs) aquí.
-
-Otras plantillas y recursos como este se pueden encontrar en la página de GitHub de la escuela.
+Notas
+Este proyecto asume familiaridad básica con la programación en Python y los conceptos de aprendizaje automático.
+Para cualquier problema o pregunta, por favor no dudes en contactar
