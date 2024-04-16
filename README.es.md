@@ -22,7 +22,8 @@ El proyecto está organizado de la siguiente manera:
 
 ```bash
 pip install -r requirements.txt
-Ejecución de la Aplicación
+
+## Ejecución de la Aplicación
 Para ejecutar la aplicación, ejecuta el script app.py desde la raíz del directorio del proyecto:
 
 bash
@@ -32,9 +33,9 @@ Trabajando con los Datos
 El proyecto utiliza el archivo total_data_final.csv como conjunto de datos para entrenar el modelo de aprendizaje automático. Si necesitas preprocesar o analizar los datos más a fondo, puedes modificar el script app.py o crear scripts de Python adicionales para manejar estas tareas.
 
 Colaboradores
-Kevin Kenneth
+Kevin Badillo
 Dario Zerpa
 
 Notas
 Este proyecto asume familiaridad básica con la programación en Python y los conceptos de aprendizaje automático.
-Para cualquier problema o pregunta, por favor contacta.
+Para cualquier problema o pregunta, por favor contacta
